@@ -39,4 +39,14 @@ Estos son algunas tareas que quedan pendientes:
 - Añadir comandos de Volatility y analizadores para Linux y MacOS.
 
 
+### Agradecimientos
+A mis tutores:
+- Francisco José Abad Cerda.
+- Jaume Martín Claramonte.
+- José Miguel Holguin Aparicio.
+
+Este proyecto está basado en el proyecto [VolUtility][VolUtility], por lo que también se le agradezco a su autor:
+
+- Kevthehermit
+
 [VolUtility]: https://github.com/kevthehermit/VolUtility
