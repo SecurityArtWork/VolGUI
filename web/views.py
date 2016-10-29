@@ -10,7 +10,7 @@ from datetime import datetime
 
 # ATENTION!!!
 # you must enter the absolute path of the dump
-path_dumps = '/media/cec/0E8C0B788C0B5A1B/TFG/VolGUI/VolGUI_V0.4.1_ACABADO/VolGUI/web/dumps/'
+path_dumps = '/media/.../VolGUI/web/dumps/'
 
 import logging
 logger = logging.getLogger(__name__)
