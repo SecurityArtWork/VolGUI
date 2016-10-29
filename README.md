@@ -24,7 +24,7 @@ $ python manage.py runserver <IP:Puerto>
 Posteriormente, Django indicará la URL que hay que introducir en el navegador del cliente para poder trabajar con VolGUI.
 
 ### Desarrollo
-¿Quieres contribuir al proyecto? ¡Fantastico!
+¿Quieres contribuir al proyecto? ¡Fantástico!
 
 Cualquier idea de mejora es bien recibida, `¡TE ANIMAMOS A CONTRIBUIR!`
 
