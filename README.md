@@ -24,18 +24,19 @@ $ python manage.py runserver <IP:Puerto>
 Posteriormente, Django indicará la URL que hay que introducir en el navegador del cliente para poder trabajar con VolGUI.
 
 ### Desarrollo
-¿Quieres contribuir al proyecto? ¡Fantástico!
+¿Quieres contribuir al proyecto? ¡Fantastico!
 
 Cualquier idea de mejora es bien recibida, `¡TE ANIMAMOS A CONTRIBUIR!`
 
+Estos son algunas tareas que quedan pendientes:
+- Redactar la documentación para desarrolladores.
+- Solucionar los problemas que se han detectado en la fase de pruebas.
+- Ampliar la seguridad de la aplicación permitiendo que cada usuario tenga nombre y contraseña y realizar un análisis de vulnerabilidades software que permita evitar posibles ataques a la interfaz.
+- Permitir al usuario que pueda añadir más paneles Command Output y Analysis Output para que pueda visualizar al mismo tiempo más cantidad de resultados de los comandos y de los analizadores.
+- Incluir en la aplicación más comandos de Volatility y que se pueda introducir parámetros adicionales.
+- Aumentar la eficiencia de la aplicación.
+- Convertir aquellos comandos que su formato de salida es texto en tablas.
+- Añadir comandos de Volatility y analizadores para Linux y MacOS.
+
+
 [VolUtility]: https://github.com/kevthehermit/VolUtility
-
-### Agradecimientos
-A mis tutores:
-- Francisco José Abad Cerda.
-- Jaume Martín Claramonte.
-- José Miguel Holguin Aparicio.
-
-Este proyecto está basado en el proyecto [VolUtility][VolUtility], por lo que también se le agradezco a su autor:
-
-- Kevthehermit
