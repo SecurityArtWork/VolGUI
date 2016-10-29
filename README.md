@@ -1,5 +1,5 @@
 # VolGUI
-VolGUI es una interfaz gráfica de usuario para Volatility que permite almacenar los resultados en una base de datos y proporciona un análisis inicial de algunos de los comandos de Volatility para ayudar al analista forense a localizar, de forma más rápida, la presencia de software malicioso.
+VolGUI es una interfaz gráfica de usuario para [Volatility][Volatility] que permite almacenar los resultados en una base de datos y proporciona un análisis inicial de algunos de los comandos de Volatility para ayudar al analista forense a localizar, de forma más rápida, la presencia de software malicioso.
 Toda la información necesaria la puedes encontrar en el siguiente enlace:
 
 https://riunet.upv.es/handle/10251/70831
@@ -50,3 +50,4 @@ Este proyecto está basado en el proyecto [VolUtility][VolUtility], por lo que t
 - Kevthehermit
 
 [VolUtility]: https://github.com/kevthehermit/VolUtility
+[Volatility]: http://www.volatilityfoundation.org/
