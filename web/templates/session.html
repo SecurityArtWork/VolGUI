@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% load template_dict %}
+
+{% block title %}{{session_details.session_name}}{% endblock %}
+
+
+{% block session_content %}
+
+
+<div class="panel-group" id="accordion">
+	<!-- Panel Result -->
+	<div class="panel panel-default" id="panel1">
+		<div class="panel-heading">
+				<!-- Search command -->
+				<div class="row">
+				   <div class="col-md-11">
+						<h4></b><strong>Command Output</strong></h4>
+				   </div>
+				   
+<!--
+				   <div class="col-md-3">
+				    {% csrf_token %}
+					  <input id="pluginfilter" type="text" class="form-control" placeholder="Search Command"></input>
+					  
+					  <table class="tableSP table-striped table-borderedSP table-hoverSP table-search" id="pluginTable" style="display:none">
+						  	 <thead>
+								<tr>
+								   <th>Plugin Command</th>
+								   <th>Actions</th>
+								</tr>
+							  </thead>
+
+							   <tbody id="pluginTable" class="pluginsearch">
+
+							   {% include "plugin_poll.html" %}
+
+							   </tbody>
+					   </table>
+				   </div>
+-->
+				   
+					<div class="col-md-1">
+						<h4><b data-toggle="collapse" data-target="#collapseOne" href="#collapseOne"></b></h4>
+					</div>
+				<!-- End Search command -->
+				</div>
+		</div>
+		
+		<div id="collapseOne" class="panel-collapse collapse in">
+			<div class="panel-body">
+
+					<div class="col-lg-12"><div id="resultsTarget"></div></div>
+
+			</div>
+		</div>
+	</div>
+	<!-- END Panel Result -->
+
+
+	<!-- Panel Analysis -->
+	<div class="panel panel-default" id="panel2">
+		<div class="panel-heading">
+				<div class="row">
+				   <div class="col-lg-12">
+						<h4><strong>Analysis Output</strong><b data-toggle="collapse" data-target="#collapseTwo" href="#collapseTwo"></b></h4>
+				   </div>
+				</div>
+		</div>
+		
+		<div id="collapseTwo" class="panel-collapse collapse in">
+			<div class="panel-body">
+
+				<div class="col-lg-12"><div id="resultsTargetAnalysis"></div></div>
+					
+			</div>
+		</div>
+	</div>
+	<!-- END Panel Analysis -->
+</div>
+
+<div class="col-lg-12" id="dotimage"></div>
+
+<div id="fileModalDiv"></div>
+<div id="hiveModalDiv"></div>
+
+{% include "yara_modal.html" %}
+{% include "raw_memory_modal.html" %}
+{% include "info_session_modal.html" %}
+{% include "info_image_modal.html" %}
+{% include "add_plugin_modal.html" %}
+
+<div class="comment-modal">
+{% include "comments_modal.html" %}
+</div>
+
+<!--
+<ul id="contextMenu" class="dropdown-menu" role="menu" style="display:none" >
+    <li><a tabindex="-1" href="#">BookMark Row</a></li>
+    <li><a tabindex="-1" href="#">Search cell value</a></li>
+    <li class="divider"></li>
+    <li><a tabindex="-1" href="#">Export Row</a></li>
+    <li><a tabindex="-1" href="#">Export Table</a></li>
+
+</ul>
+-->
+
+
+    
+
+{% endblock session_content %}

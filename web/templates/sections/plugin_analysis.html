@@ -1,0 +1,1213 @@
+{% load template_dict %}
+<center><h4><strong style="text-transform: uppercase">{{ plugin_name }}</strong></h4></center>
+
+<!-- Anaysis atomscan -->
+{% if plugin_status == 'completed' and plugin_name == 'atomscan' %}
+	<h5><strong>List of modules with blanck name:</strong></h5>
+	{% if atomscan_analysis|length == 0 %}
+		<div style="color:#328332">No modules with blanck name found.</div>
+	{% else %}
+		<table id="resultsTableAnalysis" class="table table-striped table-bordered table-hover resultsTable long-line">
+			<thead>
+				<tr>
+					<th>Offset(P)</th>
+					<th>AtomOfs(V)</th>
+					<th>Atom</th>
+					<th>Refs</th>
+					<th>Pinned</th>
+					<th>Name</th>
+					<th>ATTENTION</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr>
+					{%  for data in atomscan_analysis %}
+						{% if data == 'r' %}
+							<td style="color:#ff0000">DANGER!</td>
+						{% else %}
+							<td>{{ data }}</td>
+						{% endif %}
+						{% if forloop.last %}
+							</tr>
+						{% else %}
+							{% if forloop.counter|divisibleby:7 %}
+							</tr><tr>
+							{% endif %}
+						{% endif %}
+					{% endfor %}
+				</tr>		
+			</tbody>
+		</table>
+	{% endif %}
+{% endif %}
+<!-- END Anaysis atomscan -->
+
+
+<!-- Anaysis callback -->
+{% if plugin_status == 'completed' and plugin_name == 'callbacks' %}
+	<h5><strong>List of possible Rootkits:</strong></h5>
+	{% if callback_analysis|length == 0 %}
+		<div style="color:#328332">No rootkits found.</div>
+	{% else %}
+		<table id="resultsTableAnalysis" class="table table-striped table-bordered table-hover resultsTable long-line">
+			<thead>
+				<tr>
+					<th>Type</th>
+					<th>Callback</th>
+					<th>Module</th>
+					<th>Details</th>
+					<th>ATTENTION</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr>
+					{%  for data in callback_analysis %}
+						{% if data == 'o' %}
+							<td style="color:#FFA500">WARNING</td>
+						{% elif data == 'r' %}
+							<td style="color:#ff0000">DANGER!</td>
+						{% else %}
+							<td>{{ data }}</td>
+						{% endif %}
+						{% if forloop.last %}
+							</tr>
+						{% else %}
+							{% if forloop.counter|divisibleby:5 %}
+							</tr><tr>
+							{% endif %}
+						{% endif %}
+					{% endfor %}
+				</tr>		
+			</tbody>
+		</table>
+	{% endif %}
+{% endif %}
+<!-- END Anaysis callback -->
+
+
+<!-- Anaysis cmdscan -->
+{% if plugin_status == 'completed' and plugin_name == 'cmdscan' %}
+	<h5><strong>Services created and started from the console:</strong></h5>
+	{% if cmdscan_analysis|length == 0 %}
+		<div style="color:#328332">No services created or initialized from console.</div>
+	{% else %}
+		<table id="resultsTableAnalysis" class="table table-striped table-bordered table-hover resultsTable long-line">
+			<thead>
+				<tr>
+					<th>Process</th>
+					<th>PID</th>
+					<th>HistoryOffset</th>
+					<th>Aplication</th>
+					<th>Flags</th>
+					<th>Command Count</th>
+					<th>Last Added</th>
+					<th>Last Dislplayed</th>
+					<th>First Command</th>
+					<th>Command Count Max</th>
+					<th>Handle</th>
+					<th>Command Number</th>
+					<th>Command Offset</th>
+					<th>Service</th>
+					<th>ATTENTION</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr>
+					{%  for data in cmdscan_analysis %}
+						{% if data == 'g' %}
+							<td style="color:#328332">NO WARNING</td>
+						{% elif data == 'o' %}
+							<td style="color:#FFA500">WARNING</td>
+						{% elif data == 'r' %}
+							<td style="color:#ff0000">DANGER!</td>
+						{% else %}
+							<td>{{ data }}</td>
+						{% endif %}
+						{% if forloop.last %}
+							</tr>
+						{% else %}
+							{% if forloop.counter|divisibleby:15 %}
+							</tr><tr>
+							{% endif %}
+						{% endif %}
+					{% endfor %}
+				</tr>		
+			</tbody>
+		</table>
+	{% endif %}
+{% endif %}
+<!-- END Anaysis cmdscan -->
+
+<!-- Anaysis connscan -->
+{% if plugin_status == 'completed' and plugin_name == 'connscan' %}
+	<h5><strong>List of IP with no common port:</strong></h5>
+	{% if connscan_analysis|length == 0 %}
+		<div style="color:#328332">All ports are common.</div>
+	{% else %}
+		<table id="resultsTableAnalysis" class="table table-striped table-bordered table-hover resultsTable long-line">
+			<thead>
+				<tr>
+					<th>Offset(P)</th>
+					<th>LocalAddress</th>
+					<th>RemoteAddress</th>
+					<th>PID</th>
+					<th>ATTENTION</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr>
+					{%  for data in connscan_analysis %}
+						{% if data == 'o' %}
+							<td style="color:#FFA500">WARNING</td>
+						{% elif data == 'r' %}
+							<td style="color:#ff0000">DANGER!</td>
+						{% else %}
+							<td>{{ data }}</td>
+						{% endif %}
+						{% if forloop.last %}
+							</tr>
+						{% else %}
+							{% if forloop.counter|divisibleby:5 %}
+							</tr><tr>
+							{% endif %}
+						{% endif %}
+					{% endfor %}
+				</tr>		
+			</tbody>
+		</table>
+	{% endif %}
+	
+	<h5><strong>List of Private IPv4:</strong></h5>
+	{% if IPs_private|length == 0 %}
+		<div style="color:#328332">No private IPs.</div>
+	{% else %}
+		{%  for data in IPs_private %}
+			<div>{{ data }}</div>
+		{% endfor %}
+	{% endif %}
+	
+	<h5><strong>List of Public IPv4:</strong></h5>
+	{% if IPs_publics|length == 0 %}
+		<div style="color:#328332">No public IPs.</div>
+	{% else %}
+		{%  for data in IPs_publics %}
+			<div>{{ data }}</div>
+		{% endfor %}
+	{% endif %}
+{% endif %}
+<!-- END Anaysis connscan -->
+
+<!-- Anaysis consoles -->
+{% if plugin_status == 'completed' and plugin_name == 'consoles' %}
+	<h5><strong>Services created and started from the console and ftp command:</strong></h5>
+	{% if consoles_analysis|length == 0 %}
+		<div style="color:#328332">No services created or initialized from console or ftp command.</div>
+	{% else %}
+		<table id="resultsTableAnalysis" class="table table-striped table-bordered table-hover resultsTable long-line">
+			<thead>
+				<tr>
+					<th>Console Process</th>
+					<th>Console PID</th>
+					<th>Console ID</th>
+					<th>Original Title</th>
+					<th>Title</th>
+					<th>Attached Process Name</th>
+					<th>Attached Process PID</th>
+					<th>Attached Process Handle</th>
+					<th>Command History ID</th>
+					<th>Command History Application</th>
+					<th>Command History Flag</th>
+					<th>Command History and Command String</th>
+					<th>ATTENTION</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr>
+					{%  for data in consoles_analysis %}
+						{% if data == 'o' %}
+							<td style="color:#FFA500">WARNING</td>
+						{% else %}
+							<td>{{ data }}</td>
+						{% endif %}
+						{% if forloop.last %}
+							</tr>
+						{% else %}
+							{% if forloop.counter|divisibleby:13 %}
+							</tr><tr>
+							{% endif %}
+						{% endif %}
+					{% endfor %}
+				</tr>		
+			</tbody>
+		</table>
+	{% endif %}
+{% endif %}
+<!-- END Anaysis consoles -->
+
+<!-- Anaysis connections -->
+{% if plugin_status == 'completed' and plugin_name == 'connections' %}
+	<h5><strong>List of IP with no common port:</strong></h5>
+	{% if connections_analysis|length == 0 %}
+		<div style="color:#328332">All ports are common.</div>
+	{% else %}
+		<table id="resultsTableAnalysis" class="table table-striped table-bordered table-hover resultsTable long-line">
+			<thead>
+				<tr>
+					<th>Offset(V)</th>
+					<th>LocalAddress</th>
+					<th>RemoteAddress</th>
+					<th>PID</th>
+					<th>ATTENTION</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr>
+					{%  for data in connections_analysis %}
+						{% if data == 'o' %}
+							<td style="color:#FFA500">WARNING</td>
+						{% elif data == 'r' %}
+							<td style="color:#ff0000">DANGER!</td>
+						{% else %}
+							<td>{{ data }}</td>
+						{% endif %}
+						{% if forloop.last %}
+							</tr>
+						{% else %}
+							{% if forloop.counter|divisibleby:5 %}
+							</tr><tr>
+							{% endif %}
+						{% endif %}
+					{% endfor %}
+				</tr>		
+			</tbody>
+		</table>
+	{% endif %}
+	
+	<h5><strong>List of Private IPv4:</strong></h5>
+	{% if IPs_private|length == 0 %}
+		<div style="color:#328332">No private IPs.</div>
+	{% else %}
+		{%  for data in IPs_private %}
+			<div>{{ data }}</div>
+		{% endfor %}
+	{% endif %}
+	
+	<h5><strong>List of Public IPv4:</strong></h5>
+	{% if IPs_publics|length == 0 %}
+		<div style="color:#328332">No public IPs.</div>
+	{% else %}
+		{%  for data in IPs_publics %}
+			<div>{{ data }}</div>
+		{% endfor %}
+	{% endif %}
+{% endif %}
+<!-- END Anaysis connections -->
+
+<!-- Anaysis deskscan -->
+{% if plugin_status == 'completed' and plugin_name == 'deskscan' %}
+	<h5><strong>Attempt to steal credentials or possible "Keylogger" o "mouse movements detector":</strong></h5>
+	{% if deskscan_analysis|length == 0 %}
+		<div style="color:#328332">No attempt to steal credentials or possible "Keylogger" o "mouse movements detector":</div>
+	{% else %}
+		<table id="resultsTableAnalysis" class="table table-striped table-bordered table-hover resultsTable long-line">
+			<thead>
+				<tr>
+					<th>Offset</th>
+					<th>Name</th>
+					<th>Next</th>
+					<th>Sesionid</th>
+					<th>Desktopinfo</th>
+					<th>fsHooks</th>
+					<th>spwnd</th>
+					<th>Windows</th>
+					<th>Heap</th>
+					<th>Size</th>
+					<th>Base</th>
+					<th>Limit</th>
+					<th>Threadld</th>
+					<th>Process</th>
+					<th>PID</th>
+					<th>PPID</th>				
+					<th>ATTENTION</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr>
+					{%  for data in deskscan_analysis %}
+						{% if data == 'o' %}
+							<td style="color:#FFA500">WARNING Attempt to steal credentials</td>
+						{% elif data == 'r' %}
+							<td style="color:#ff0000">DANGER!"Keylogger" o "mouse movements detector"</td>
+						{% else %}
+							<td>{{ data }}</td>
+						{% endif %}
+						{% if forloop.last %}
+							</tr>
+						{% else %}
+							{% if forloop.counter|divisibleby:17 %}
+							</tr><tr>
+							{% endif %}
+						{% endif %}
+					{% endfor %}
+				</tr>		
+			</tbody>
+		</table>
+	{% endif %}
+	
+	<h5><strong>Does the number of windows default desktop is less than the rest of desks?:</strong></h5>
+	{% if attention_numWin == 'No' %}
+		<div style="color:#328332">NO WARNING: The number of windows default desktop (WinSta0\Default) is higher to other desktops.</div>
+	{% else %}
+		<div style="color:#ff0000">ATTENTION! The number of windows desktop default (WinSta0\Default) is lower than other desktops.</div>
+	{% endif %}
+	
+{% endif %}
+<!-- END Anaysis deskscan -->
+
+<!-- Anaysis dllist -->
+{% if plugin_status == 'completed' and plugin_name == 'dlllist' %}
+	<h5><strong>Suspects processes to run their libraries on a different route to "c:\windows\system32", "C:\WINDOWS\System32" or "C:\WINDOWS\system32":</strong></h5>
+	{% if dllist_analysis_path|length == 0 %}
+		<div style="color:#328332">No suspicious processes.</div>
+	{% else %}
+		<table id="resultsTableAnalysis" class="table table-striped table-bordered table-hover resultsTable long-line">
+			<thead>
+				<tr>
+					<th>PID</th>
+					<th>Base</th>
+					<th>Path</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr>
+					{%  for data in dllist_analysis_path %}
+							<td>{{ data }}</td>
+						{% if forloop.last %}
+							</tr>
+						{% else %}
+							{% if forloop.counter|divisibleby:3 %}
+							</tr><tr>
+							{% endif %}
+						{% endif %}
+					{% endfor %}
+				</tr>		
+			</tbody>
+		</table>
+	{% endif %}
+{% endif %}
+<!-- END Anaysis dllist -->
+
+<!-- Anaysis envars -->
+{% if plugin_status == 'completed' and plugin_name == 'envars' %}
+	<h5><strong>These environment variable are not common on Windows:</strong></h5>
+	{% if envars_analysis|length == 0 %}
+		<div style="color:#328332">All environment variable are common on Windows.</div>
+	{% else %}
+		<table id="resultsTableAnalysis" class="table table-striped table-bordered table-hover resultsTable long-line">
+			<thead>
+				<tr>
+					<th>PID</th>
+					<th>Process</th>
+					<th>Block</th>
+					<th>Variable</th>
+					<th>Value</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr>
+					{%  for data in envars_analysis %}
+							<td>{{ data }}</td>
+						{% if forloop.last %}
+							</tr>
+						{% else %}
+							{% if forloop.counter|divisibleby:5 %}
+							</tr><tr>
+							{% endif %}
+						{% endif %}
+					{% endfor %}
+				</tr>		
+			</tbody>
+		</table>
+	{% endif %}
+{% endif %}
+<!-- END Anaysis envars -->
+
+<!-- Anaysis getsids -->
+{% if plugin_status == 'completed' and plugin_name == 'getsids' %}
+	<h5><strong>System user list:</strong></h5>
+	{% if usser_list_dist|length == 0 %}
+		<div style="color:#ff0000">DANGER! No users in the system.</div>
+	{% else %}
+		{%  for data in usser_list_dist %}
+			<div>{{ data }}</div>
+		{% endfor %}
+	{% endif %}
+{% endif %}
+<!-- END Anaysis getsids -->
+
+<!-- Anaysis handles -->
+{% if plugin_status == 'completed' and plugin_name == 'handles' %}
+	<h5><strong>List of possible remote units (View command "Symlinkscan" if Details is "\Device\Mup" or View command "sockets" if Details is "	\Device\RawIp"):</strong></h5>
+	{% if handles_analysis|length == 0 %}
+		<div style="color:#328332">No remote mounted units.</div>
+	{% else %}
+		<table id="resultsTableAnalysis" class="table table-striped table-bordered table-hover resultsTable long-line">
+			<thead>
+				<tr>
+					<th>Offset(V)</th>
+					<th>PID</th>
+					<th>Handle</th>
+					<th>Access</th>
+					<th>Details</th>
+					<th>ATTENTION</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr>
+					{%  for data in handles_analysis %}
+						{% if data == 'o' %}
+							<td style="color:#FFA500">WARNING</td>
+						{% else %}
+							<td>{{ data }}</td>
+						{% endif %}
+						{% if forloop.last %}
+							</tr>
+						{% else %}
+							{% if forloop.counter|divisibleby:6 %}
+							</tr><tr>
+							{% endif %}
+						{% endif %}
+					{% endfor %}
+				</tr>		
+			</tbody>
+		</table>
+	{% endif %}
+{% endif %}
+<!-- END Anaysis handles -->
+
+<!-- Anaysis iehistory -->
+{% if plugin_status == 'completed' and plugin_name == 'iehistory' %}
+	<h5><strong>Internet downloaded files in "Temporary Internet Files" folder:</strong></h5>
+	{% if iehistory_analysis|length == 0 %}
+		<div style="color:#328332">No downloaded Internet files.</div>
+	{% else %}
+		<table id="resultsTableAnalysis" class="table table-striped table-bordered table-hover resultsTable long-line">
+			<thead>
+				<tr>
+					<th>File</th>
+					<th>Process</th>
+					<th>PID</th>
+					<th>Cache Type</th>
+					<th>Offset</th>
+					<th>Location</th>
+					<th>LastModified</th>
+					<th>LastAccessed</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr>
+					{%  for data in iehistory_analysis %}
+							<td>{{ data }}</td>
+						{% if forloop.last %}
+							</tr>
+						{% else %}
+							{% if forloop.counter|divisibleby:8 %}
+							</tr><tr>
+							{% endif %}
+						{% endif %}
+					{% endfor %}
+				</tr>		
+			</tbody>
+		</table>
+	{% endif %}
+{% endif %}
+<!-- END Anaysis iehistory -->
+
+<!-- Anaysis ldrmodules -->
+{% if plugin_status == 'completed' and plugin_name == 'ldrmodules' %}
+	<h5><strong>Possible hidden libraries:</strong></h5>
+	{% if ldrmodules_analysis|length == 0 %}
+		<div style="color:#328332">No suspicious libraries.</div>
+	{% else %}
+		<table id="resultsTableAnalysis" class="table table-striped table-bordered table-hover resultsTable long-line">
+			<thead>
+				<tr>
+					<th>PID</th>
+					<th>Process</th>
+					<th>Base</th>
+					<th>MappedPath</th>
+					<th>Hidden</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr>
+					{%  for data in ldrmodules_analysis %}
+						{% if data == 'r' %}
+							<td style="color:#ff0000">DANGER!</td>
+						{% else %}
+							<td>{{ data }}</td>
+						{% endif %}
+						{% if forloop.last %}
+							</tr>
+						{% else %}
+							{% if forloop.counter|divisibleby:5 %}
+								</tr><tr>
+							{% endif %}
+						{% endif %}
+					{% endfor %}
+				</tr>		
+			</tbody>
+		</table>
+	{% endif %}
+{% endif %}
+<!-- END Anaysis ldrmodules -->
+
+<!-- Anaysis netscan -->
+{% if plugin_status == 'completed' and plugin_name == 'netscan' %}
+	
+	<h5><strong>List of Private IPv4:</strong></h5>
+	{% if IPs_private|length == 0 %}
+		<div style="color:#328332">No private IPs.</div>
+	{% else %}
+		{%  for data in IPs_private %}
+			<div>{{ data }}</div>
+		{% endfor %}
+	{% endif %}
+	
+	<h5><strong>List of Public IPv4:</strong></h5>
+	{% if IPs_publics|length == 0 %}
+		<div style="color:#328332">No public IPs.</div>
+	{% else %}
+		{%  for data in IPs_publics %}
+			<div>{{ data }}</div>
+		{% endfor %}
+	{% endif %}
+
+	<h5><strong>List of IPv4 with no common port:</strong></h5>
+	{% if netscan_analysis|length == 0 %}
+		<div style="color:#328332">All ports are common.</div>
+	{% else %}
+		<table id="resultsTableAnalysis" class="table table-striped table-bordered table-hover resultsTable long-line">
+			<thead>
+				<tr>
+					<th>Offset(P)</th>
+					<th>Proto</th>
+					<th>LocalAdress</th>
+					<th>ForeignAddr</th>
+					<th>State</th>
+					<th>PID</th>
+					<th>Owner</th>
+					<th>Created</th>
+					<th>ATTENTION</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr>
+					{%  for data in netscan_analysis %}
+						{% if data == 'o' %}
+							<td style="color:#FFA500">WARNING</td>
+						{% elif data == 'r' %}
+							<td style="color:#ff0000">DANGER!</td>
+						{% else %}
+							<td>{{ data }}</td>
+						{% endif %}
+						{% if forloop.last %}
+							</tr>
+						{% else %}
+							{% if forloop.counter|divisibleby:9 %}
+								</tr><tr>
+							{% endif %}
+						{% endif %}
+					{% endfor %}
+				</tr>		
+			</tbody>
+		</table>
+	{% endif %}
+	
+
+	
+	<h5><strong>List of IPv6:</strong></h5>
+	{% if IPs_v6|length == 0 %}
+		<div style="color:#328332">No IPs version 6.</div>
+	{% else %}
+		{%  for data in IPs_v6 %}
+			<div>{{ data }}</div>
+		{% endfor %}
+	{% endif %}
+	
+{% endif %}
+<!-- END Anaysis netscan -->
+
+<!-- Anaysis objtypescan -->
+{% if plugin_status == 'completed' and plugin_name == 'objtypescan' %}
+	<h5><strong>These objects are not common on Windows:</strong></h5>
+	{% if objtypescan_analysis|length == 0 %}
+		<div style="color:#328332">All objects are common on Windows.</div>
+	{% else %}
+		<table id="resultsTableAnalysis" class="table table-striped table-bordered table-hover resultsTable long-line">
+			<thead>
+				<tr>
+					<th>Offset</th>
+					<th>nObjects</th>
+					<th>nHandles</th>
+					<th>Key</th>
+					<th>Name</th>
+					<th>PoolType</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr>
+					{%  for data in objtypescan_analysis %}
+							<td>{{ data }}</td>
+						{% if forloop.last %}
+							</tr>
+						{% else %}
+							{% if forloop.counter|divisibleby:6 %}
+								</tr><tr>
+							{% endif %}
+						{% endif %}
+					{% endfor %}
+				</tr>		
+			</tbody>
+		</table>
+	{% endif %}
+{% endif %}
+<!-- END Anaysis objtypescan -->
+
+<!-- Anaysis pslist -->	
+{% if plugin_status == 'completed' and plugin_name == 'pslist' %}
+	<h5><strong>Processes without ".exe" extension:</strong></h5>
+	{% if pslist_analysis|length == 0 %}
+		<div style="color:#328332">All processes have the ".exe" extension.</div>
+	{% else %}
+		<table id="resultsTableAnalysis" class="table table-striped table-bordered table-hover resultsTable long-line">
+			<thead>
+				<tr>
+					<th>Offset(P)</th>
+					<th>Name</th>
+					<th>PID</th>
+					<th>PPID</th>
+					<th>ATTENTION</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr>
+					{%  for data in pslist_analysis %}
+						{% if data == 'o' %}
+							<td style="color:#FFA500">WARNING</td>
+						{% else %}
+							<td>{{ data }}</td>
+						{% endif %}
+						{% if forloop.last %}
+							</tr>
+						{% else %}
+							{% if forloop.counter|divisibleby:5 %}
+								</tr><tr>
+							{% endif %}
+						{% endif %}
+					{% endfor %}
+				</tr>		
+			</tbody>
+		</table>
+	{% endif %}
+{% endif %}
+<!-- END Anaysis pslist -->
+
+<!-- Anaysis privs -->
+{% if plugin_status == 'completed' and plugin_name == 'privs' %}
+	<h5><strong>List of processes with active privileges:</strong></h5>
+	{% if privs_analysis|length == 0 %}
+		<div style="color:#328332">No suspicious processes.</div>
+	{% else %}
+		<table id="resultsTableAnalysis" class="table table-striped table-bordered table-hover resultsTable long-line">
+			<thead>
+				<tr>
+					<th>PID</th>
+					<th>Process</th>
+					<th>Privilege</th>
+					<th>Description</th>
+					<th>ATTENTION</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr>
+					{%  for data in privs_analysis %}
+						{% if data == 'o' %}
+							<td style="color:#FFA500">WARNING</td>
+						{% elif data == 'r' %}
+							<td style="color:#ff0000">DANGER!</td>
+						{% else %}
+							<td>{{ data }}</td>
+						{% endif %}
+						{% if forloop.last %}
+							</tr>
+						{% else %}
+							{% if forloop.counter|divisibleby:5 %}
+								</tr><tr>
+							{% endif %}
+						{% endif %}
+					{% endfor %}
+				</tr>		
+			</tbody>
+		</table>
+	{% endif %}
+{% endif %}
+<!-- END Anaysis privs -->
+
+
+
+<!-- Anaysis psscan -->	
+{% if plugin_status == 'completed' and plugin_name == 'psscan' %}
+	<h5><strong>Is there a process Idle ?:</strong></h5>
+	
+	{% if Idle == 'r' %}
+		<div style="color:#ff0000">DANGER!: There is a process Idle.</div>
+	{% else %}
+		<div style="color:#328332">NO WARNING: No Idle process.</div>
+	{% endif %}	
+	
+	<h5><strong>System PID:</strong></h5>
+	{% if System_PID == 'r' %}
+		<div style="color:#ff0000">DANGER!: System PID is other than four.</div>
+	{% else %}
+		<div style="color:#328332">NO WARNING: System PID is four.</div>
+	{% endif %}	
+	
+	
+	<h5><strong>Cmd child processes:</strong></h5>
+	{% if psscan_analysis|length == 0 %}
+		<div style="color:#328332">Cmd has no children.</div>
+	{% else %}
+		<table id="resultsTableAnalysis" class="table table-striped table-bordered table-hover resultsTable long-line">
+			<thead>
+				<tr>
+					<th>Offset(P)</th>
+					<th>Name</th>
+					<th>PID</th>
+					<th>PPID</th>
+					<th>PDB</th>
+					<th>Time Created</th>
+					<th>Time Exited</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr>
+					{%  for data in psscan_analysis %}
+							<td>{{ data }}</td>
+						{% if forloop.last %}
+							</tr>
+						{% else %}
+							{% if forloop.counter|divisibleby:7 %}
+								</tr><tr>
+							{% endif %}
+						{% endif %}
+					{% endfor %}
+				</tr>		
+			</tbody>
+		</table>
+	{% endif %}
+{% endif %}
+<!-- END Anaysis psscan -->
+
+
+<!-- Anaysis psxview -->
+{% if plugin_status == 'completed' and plugin_name == 'psxview' %}
+	<h5><strong>Number of "System" and "services.exe" processes:</strong></h5>
+	{% if count_System > 1 or count_services > 1 %}
+		<div style="color:#ff0000">ATTENTION!</div>
+		<div style="color:#FFA500">There are {{ count_System }} processes System.</div>
+		<div style="color:#FFA500">There are {{ count_services }} processes services.exe.</div>
+	{% else %}
+		<div style="color:#328332">There are {{ count_System }} processes System.</div>
+		<div style="color:#328332">There are {{ count_services }} processes services.exe.</div>
+	{% endif %}
+	
+	<h5><strong>Possible hidden processes and rootkits:</strong></h5>
+	{% if psxview_analysis|length == 0 %}
+		<div style="color:#328332">No suspicious processes</div>
+	{% else %}	
+		<table id="resultsTableAnalysis" class="table table-striped table-bordered table-hover resultsTable long-line">
+			<thead>
+				<tr>
+					<th>Offset(P)</th>
+					<th>Name</th>
+					<th>PID</th>
+					<th>Hidden</th>
+					<th>Rootkit</th>
+					<th>Blackligth / IceSword</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr>
+					{%  for data in psxview_analysis %}
+						{% if data == 'g' %}
+							<td style="color:#328332">NO WARNING</td>
+						{% elif data == 'o' %}
+							<td style="color:#FFA500">WARNING</td>
+						{% elif data == 'r' %}
+							<td style="color:#ff0000">DANGER!</td>
+						{% else %}
+							<td>{{ data }}</td>
+						{% endif %}
+						{% if forloop.last %}
+							</tr>
+						{% else %}
+							{% if forloop.counter|divisibleby:6 %}
+								</tr><tr>
+							{% endif %}
+						{% endif %}
+					{% endfor %}
+			</tbody>
+		</table>
+	{% endif %}
+{% endif %}
+<!-- END Anaysis psxview -->
+
+<!-- Anaysis shimcache -->
+{% if plugin_status == 'completed' and plugin_name == 'shimcache' %}
+	<h5><strong>Suspects path on a different route to "\??\C:\WINDOWS\system32\", "\??\C:\Program Files\" or "\??\C:\Documents and Settings\":</strong></h5>
+	{% if shimcache_analysis_path|length == 0 %}
+		<div style="color:#328332">No suspicious path.</div>
+	{% else %}
+		<table id="resultsTableAnalysis" class="table table-striped table-bordered table-hover resultsTable long-line">
+			<thead>
+				<tr>
+					<th>Last Modified</th>
+					<th>Last Update</th>
+					<th>Path</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr>
+					{%  for data in shimcache_analysis_path %}
+							<td>{{ data }}</td>
+						{% if forloop.last %}
+							</tr>
+						{% else %}
+							{% if forloop.counter|divisibleby:3 %}
+								</tr><tr>
+							{% endif %}
+						{% endif %}
+					{% endfor %}
+				</tr>		
+			</tbody>
+		</table>
+	{% endif %}
+{% endif %}
+<!-- END Anaysis shimcache -->
+
+<!-- Anaysis sockets -->
+{% if plugin_status == 'completed' and plugin_name == 'sockets' %}
+	<h5><strong>List of no common port and processes with possible open raw sockets:</strong></h5>
+	{% if sockets_analysis|length == 0 %}
+		<div style="color:#328332">All ports are common and no processes with open raw sockets.</div>
+	{% else %}
+		<table id="resultsTableAnalysis" class="table table-striped table-bordered table-hover resultsTable long-line">
+			<thead>
+				<tr>
+					<th>Offset(P)</th>
+					<th>PID</th>
+					<th>Port</th>
+					<th>Proto</th>
+					<th>Protocol</th>
+					<th>Adress</th>
+					<th>Create Time</th>
+					<th>ATTENTION</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr>
+					{%  for data in sockets_analysis %}
+						{% if data == 'o' %}
+							<td style="color:#FFA500">WARNING</td>
+						{% elif data == 'r' %}
+							<td style="color:#ff0000">DANGER!</td>
+						{% else %}
+							<td>{{ data }}</td>
+						{% endif %}
+						{% if forloop.last %}
+							</tr>
+						{% else %}
+							{% if forloop.counter|divisibleby:8 %}
+								</tr><tr>
+							{% endif %}
+						{% endif %}
+					{% endfor %}
+				</tr>		
+			</tbody>
+		</table>
+	{% endif %}
+	
+	<h5><strong>List of Private IPv4:</strong></h5>
+	{% if IPs_private|length == 0 %}
+		<div style="color:#328332">No private IPs.</div>
+	{% else %}
+		{%  for data in IPs_private %}
+			<div>{{ data }}</div>
+		{% endfor %}
+	{% endif %}
+	
+	<h5><strong>Others IPv4:</strong></h5>
+	{% if IPs_publics|length == 0 %}
+		<div style="color:#328332">No public IPs.</div>
+	{% else %}
+		{%  for data in IPs_publics %}
+			<div>{{ data }}</div>
+		{% endfor %}
+	{% endif %}
+{% endif %}
+<!-- END Anaysis sockets -->
+
+<!-- Anaysis sockscan -->
+{% if plugin_status == 'completed' and plugin_name == 'sockscan' %}
+	<h5><strong>List of no common port and processes with open raw sockets:</strong></h5>
+	{% if sockscan_analysis|length == 0 %}
+		<div style="color:#328332">All ports are common and no processes with open raw sockets.</div>
+	{% else %}
+		<table id="resultsTableAnalysis" class="table table-striped table-bordered table-hover resultsTable long-line">
+			<thead>
+				<tr>
+					<th>Offset(P)</th>
+					<th>PID</th>
+					<th>Port</th>
+					<th>Proto</th>
+					<th>Protocol</th>
+					<th>Adress</th>
+					<th>Create Time</th>
+					<th>ATTENTION</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr>
+					{%  for data in sockscan_analysis %}
+						{% if data == 'o' %}
+							<td style="color:#FFA500">WARNING</td>
+						{% elif data == 'r' %}
+							<td style="color:#ff0000">DANGER!</td>
+						{% else %}
+							<td>{{ data }}</td>
+						{% endif %}
+						{% if forloop.last %}
+							</tr>
+						{% else %}
+							{% if forloop.counter|divisibleby:8 %}
+								</tr><tr>
+							{% endif %}
+						{% endif %}
+					{% endfor %}
+				</tr>		
+			</tbody>
+		</table>
+	{% endif %}
+	
+	<h5><strong>List of Private IPv4:</strong></h5>
+	{% if IPs_private|length == 0 %}
+		<div style="color:#328332">No private IPs.</div>
+	{% else %}
+		{%  for data in IPs_private %}
+			<div>{{ data }}</div>
+		{% endfor %}
+	{% endif %}
+	
+	<h5><strong>Others IPv4:</strong></h5>
+	{% if IPs_publics|length == 0 %}
+		<div style="color:#328332">No public IPs.</div>
+	{% else %}
+		{%  for data in IPs_publics %}
+			<div>{{ data }}</div>
+		{% endfor %}
+	{% endif %}
+{% endif %}
+<!-- END Anaysis sockscan -->
+
+<!-- Anaysis svcscan -->
+{% if plugin_status == 'completed' and plugin_name == 'svcscan' %}
+	<h5><strong>Common services Windows disabled:</strong></h5>
+	{% if svcscan_disabled_analysis|length == 0 %}
+		<div style="color:#328332">Any service disabled.</div>
+	{% else %}
+		<table id="resultsTableAnalysis" class="table table-striped table-bordered table-hover resultsTable long-line">
+			<thead>
+				<tr>
+					<th>Offset</th>
+					<th>order</th>
+					<th>Start</th>
+					<th>PID</th>
+					<th>ServiceName</th>
+					<th>DisplayName</th>
+					<th>ServiceType</th>
+					<th>State</th>
+					<th>BinaryPath</th>
+					<th>ATTENTION</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr>
+					{%  for data in svcscan_disabled_analysis %}
+						{% if data == 'o' %}
+							<td style="color:#FFA500">WARNING</td>
+						{% elif data == 'r' %}
+							<td style="color:#ff0000">DANGER!</td>
+						{% else %}
+							<td>{{ data }}</td>
+						{% endif %}
+						{% if forloop.last %}
+							</tr>
+						{% else %}
+							{% if forloop.counter|divisibleby:10 %}
+								</tr><tr>
+							{% endif %}
+						{% endif %}
+					{% endfor %}
+				</tr>		
+			</tbody>
+		</table>
+	{% endif %}
+
+	<h5><strong>These services are not common on Windows:</strong></h5>
+	{% if svcscan_analysis|length == 0 %}
+		<div style="color:#328332">All services are common on Windows.</div>
+	{% else %}
+		<table id="resultsTableAnalysis_B" class="table table-striped table-bordered table-hover resultsTable long-line">
+			<thead>
+				<tr>
+					<th>Offset</th>
+					<th>order</th>
+					<th>Start</th>
+					<th>PID</th>
+					<th>ServiceName</th>
+					<th>DisplayName</th>
+					<th>ServiceType</th>
+					<th>State</th>
+					<th>BinaryPath</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr>
+					{%  for data in svcscan_analysis %}
+							<td>{{ data }}</td>
+						{% if forloop.last %}
+							</tr>
+						{% else %}
+							{% if forloop.counter|divisibleby:9 %}
+								</tr><tr>
+							{% endif %}
+						{% endif %}
+					{% endfor %}
+				</tr>		
+			</tbody>
+		</table>
+	{% endif %}
+{% endif %}
+<!-- END Anaysis svcscan -->
+
+<!-- Anaysis symlinkscan -->
+{% if plugin_status == 'completed' and plugin_name == 'symlinkscan' %}
+	<h5><strong>List of possible remote units (View command "handles")</strong></h5>
+	{% if symlinkscan_analysis|length == 0 %}
+		<div style="color:#328332">No remote mounted units.</div>
+	{% else %}
+		<table id="resultsTableAnalysis" class="table table-striped table-bordered table-hover resultsTable long-line">
+			<thead>
+				<tr>
+					<th>Offset(P)</th>
+					<th>Pointers</th>
+					<th>Handles</th>
+					<th>Creation Time</th>
+					<th>Origin</th>
+					<th>Target</th>
+					<th>ATTENTION</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr>
+					{%  for data in symlinkscan_analysis %}
+							{% if data == 'o' %}
+								<td style="color:#FFA500">WARNING</td>
+							{% else %}
+							<td>{{ data }}</td>
+						{% endif %}
+						{% if forloop.last %}
+							</tr>
+						{% else %}
+							{% if forloop.counter|divisibleby:7 %}
+								</tr><tr>
+							{% endif %}
+						{% endif %}
+					{% endfor %}
+				</tr>		
+			</tbody>
+		</table>
+	{% endif %}
+{% endif %}
+<!-- END Anaysis symlinkscan -->
+
+<!-- Anaysis timers -->
+{% if plugin_status == 'completed' and plugin_name == 'timers' %}
+	<h5><strong>List of possible Rootkits:</strong></h5>
+	{% if timers_analysis|length == 0 %}
+		<div style="color:#328332">No rootkits found.</div>
+	{% else %}
+		<table id="resultsTableAnalysis" class="table table-striped table-bordered table-hover resultsTable long-line">
+			<thead>
+				<tr>
+					<th>Offset(V)</th>
+					<th>DueTime</th>
+					<th>Period(ms)</th>
+					<th>Signaled</th>
+					<th>Routine</th>
+					<th>Module</th>
+					<th>ATTENTION</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr>
+					{%  for data in timers_analysis %}
+						{% if data == 'o' %}
+							<td style="color:#FFA500">WARNING</td>
+						{% elif data == 'r' %}
+							<td style="color:#ff0000">DANGER!</td>
+						{% else %}
+							<td>{{ data }}</td>
+						{% endif %}
+						{% if forloop.last %}
+							</tr>
+						{% else %}
+							{% if forloop.counter|divisibleby:7 %}
+							</tr><tr>
+							{% endif %}
+						{% endif %}
+					{% endfor %}
+				</tr>		
+			</tbody>
+		</table>
+	{% endif %}
+{% endif %}
+<!-- END Anaysis timers -->
+
+

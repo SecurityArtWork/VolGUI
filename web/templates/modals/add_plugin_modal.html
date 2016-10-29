@@ -1,0 +1,35 @@
+<div class="modal fade" id="pluginModal" tabindex="-1" role="dialog" aria-labelledby="pluginModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+			<!-- Modal header -->
+            <div class="modal-header">
+                <h4 class="modal-title" id="pluginModal">Add Session</h4>
+            </div>
+            
+            <!-- Modal body -->            
+            <div class="modal-body">
+
+                <div class="form-group">
+                    <h5><strong>Extra Plugin Dirs: </strong>{{ plugin_dirs }}</h5>
+                    <p>Add more plugins below. These are applied to all memory samples at import time.</p>
+                </div>
+
+                <div class="form-group">
+                    <input id="pluginDir" type="text" class="form-control" name="sess_path" placeholder="Full path to plugin dir">
+                </div>
+
+
+               
+
+
+            </div>
+            
+			<!-- Modal footer -->	            
+            <div class="modal-footer">
+				<a href="#" onclick="ajaxHandler('plugin_dir', {}, false)" class="btn btn-primary" role="button">Add</a>
+                <button type="button" class="btn  btn-primary" data-dismiss="modal">Close</button>
+            </div>
+            
+        </div>
+    </div>
+</div>

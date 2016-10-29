@@ -1,0 +1,76 @@
+<div class="modal fade" id="info_session_modal" tabindex="-1" role="dialog" aria-labelledby="SessionInfo" aria-hidden="true">
+    <div class="modal-dialog" style="width:80% !important">
+        <div class="modal-content">
+            <!-- Modal header -->
+            <div class="modal-header">
+                <h4 class="modal-title" id="SessionInfo">Session Information</h4>
+            </div>
+            
+			<!-- Modal body -->
+            <div class="modal-body" >
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-6">
+							<h5><strong>Session Information:</strong></h5>
+							<table class="table table-striped table-bordered resultsTable long-line" cellspacing="0" width="100%">
+								<tr>
+									<th>Session Name</th>
+									<td>{{session_details.session_name}}</td>
+								</tr>
+								<tr>
+									<th>Session ID</th>
+									<td>{{session_id}}</td>
+								</tr>
+								<tr>
+									<th>Memory File</th>
+									<td>{{session_details.session_path}}</td>
+								</tr>
+								<tr>
+									<th>Memory Profile</th>
+									<td>{{session_details.session_profile}}</td>
+								</tr>
+								<tr>
+									<th>Session Created</th>
+									<td>{{session_details.created|date:"M m y H:i:s"}}</td>
+								</tr>
+								<tr>
+									<th>Session Modified</th>
+									<td>{{session_details.modified|date:"M m y H:i:s"}}</td>
+								</tr>
+								<tr>
+									<th>Versions</th>
+									<td>Python: {{version_info.python}} | Volatility: {{ version_info.volatility }} | VolUtility: {{ version_info.volutility }}</td>
+								</tr>
+								<tr>
+									<th>Description</th>
+									<td>{{session_details.session_description}}</td>
+								</tr>
+							</table>
+						</div>
+						<div class="col-md-6">
+							<h5><strong>Image Information:</strong></h5>
+							<table class="table table-striped table-bordered resultsTable long-line" cellspacing="0" width="100%">
+
+							{% for key, value in session_details.image_info.items %}
+
+							<tr>
+								<th>{{ key }}</th>
+								<td>{{value}}</td>
+							</tr>
+
+							{% endfor %}
+
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>				
+            
+            <!-- Modal footer -->		   
+		   <div class="modal-footer">	
+				<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+           </div>
+
+        </div>
+    </div>
+</div>

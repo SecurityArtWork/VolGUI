@@ -1,0 +1,32 @@
+{% load template_dict %}
+{% for row in plugin_output %}
+<div class="modal fade" id="confirmModal_{{row.plugin_name}}" tabindex="-1" role="dialog" aria-labelledby="confirm_{{row.plugin_name}}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal header -->
+            <div class="modal-header">
+                <h4 class="modal-title" id="confirm">Confirm</h4>
+            </div>
+            
+            <!-- Modal body -->            
+            <div class="modal-body">
+				<center>
+				<table>
+					<tr>
+						<td><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true" style="color:#b94a48"></span></td>
+						<td><span style="padding-right:20px"></span><span style="display:inline"> Do you want to delete {{row.plugin_name}} from the database?</span></td>
+					</tr>
+				</table>
+				</center>
+			</div>				
+				
+			<!-- Modal footer -->		   
+		   <div class="modal-footer">	
+				<button type="button" class="btn btn-primary" data-dismiss="modal" name="Delete_{{row.plugin_name}}" value="Delete_{{row.plugin_name}}" onclick="ajaxHandler('dropplugin', {'plugin_id':'{{row|get:"_id"}}'}, false ); return 'false'">Delete</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+			</div>	
+     
+        </div>
+    </div>
+</div>
+{% endfor %}

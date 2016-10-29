@@ -1,0 +1,55 @@
+<div class="modal fade" id="sessionModal" tabindex="-1" role="dialog" aria-labelledby="addSession" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+			<!-- Modal header -->
+            <div class="modal-header">
+                <h4 class="modal-title" id="addSession">New Session</h4>
+            </div>
+            
+            <!-- Modal body -->
+            <div class="modal-body">
+
+			<form role="form" action="/createsession/" enctype="multipart/form-data" method="post" onsubmit="sessionCreate()">
+						{% csrf_token %}
+						<div class="form-group">
+							<label>Enter a session name</label>
+							<input type="text" class="form-control" name="sess_name" placeholder="Session Name" maxlength="20">
+						</div>
+						
+						{% csrf_token %}
+						<div class="form-group">
+							<label>Upload dump image</label>
+							<input type="file" class="filestyle" name="dump_name" data-placeholder="No file select" data-buttonBefore="true" data-buttonText="" data-buttonName="btn-primary">
+						</div>
+
+					   <div class="form-group">
+						  <label for="profile">Select a profile</label>
+						   <select class="form-control" name="profile" id="profile">
+							 {% for profile in profile_list %}
+							 <option value="{{profile}}">{{profile}}</option>
+							 {% endfor %}
+						   </select>
+					   </div>
+					   
+						{% csrf_token %}
+						<div class="form-group">
+							<label>Enter a description</label>
+							<input class="form-control" name="description" placeholder="Description" maxlength="50"></input>
+						</div>
+            </div>
+            
+			<!-- Modal footer -->					
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-primary" name="Create" value="Create">Create</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+			</div>
+
+			</form>
+			
+				<div id="loading"></div>
+
+
+
+        </div>
+    </div>
+</div>
