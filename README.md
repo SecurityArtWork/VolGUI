@@ -1,8 +1,13 @@
 # VolGUI
 VolGUI es una interfaz gráfica de usuario para [Volatility][Volatility] que permite almacenar los resultados en una base de datos y proporciona un análisis inicial de algunos de los comandos de Volatility para ayudar al analista forense a localizar, de forma más rápida, la presencia de software malicioso.
-Toda la información necesaria la puedes encontrar en el siguiente enlace:
+Toda la información necesaria la puedes encontrar en la memoria del proyecto en el siguiente enlace:
 
 https://riunet.upv.es/handle/10251/70831
+
+Si deseas hacer prácticas de análisis forense con volcados de memoria y aprender a utilizar la aplicación te recomendamos que te descarges los siguientes volcados de memoria RAM pertencientes al libro [The Art of Memory Forensics: Detecting Malware and Threats in Windows, Linux, and Mac Memory][TheArtofMemoryForensics]:
+
+https://www.sendspace.com/pro/dl/yqjezf
+
 
 ### Instalación
 Para intalar VolGUI has de descargarte el software de github y posteriormente ejecutar el script `setup.sh` que permite instalar todas las dependencias necesarias para la ejecución del programa en un sistema operativo Linux Ubuntu 14.04 x64.
@@ -49,5 +54,6 @@ Este proyecto está basado en el proyecto [VolUtility][VolUtility], por lo que t
 
 - Kevthehermit
 
+[TheArtofMemoryForensics]: http://www.memoryanalysis.net/amf
 [VolUtility]: https://github.com/kevthehermit/VolUtility
 [Volatility]: http://www.volatilityfoundation.org/
